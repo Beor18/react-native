@@ -1,39 +1,38 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React, { Component } from 'react'
+import { AppRegistry, View, Text, StyleSheet } from 'react-native'
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+class Counter extends Component {
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+  state = {count: 0}
 
-export default class App extends Component<{}> {
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({count: this.state.count + 1})
+    }, 1000)
+  }
+
+  render() {
+    const {count} = this.state
+    const {color, size} = this.props
+
+    return (
+      <Text style={{color, fontSize: size}}>
+        {count}
+      </Text>
+    )
+  }
+}
+
+class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <Counter color={'lightblue'} size={16} />
+        <Counter color={'skyblue'} size={32} />
+        <Counter color={'steelblue'} size={80} />
+        <Counter color={'darkblue'} size={140} />
       </View>
-    );
+    )
   }
 }
 
@@ -42,16 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+})
+
+AppRegistry.registerComponent('App', () => App)
