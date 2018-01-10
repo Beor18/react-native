@@ -21,7 +21,7 @@ export default class Principal extends Component {
     }
     render() {
         let notes = this.state.noteArray.map((val, key)=>{
-            return <Note key={key} keyval={key} val={val}
+            return <Nota key={key} keyval={key} val={val}
                     deleteMethod={()=>this.deleteNote(key)}/>
         });
         return (
@@ -36,7 +36,7 @@ export default class Principal extends Component {
                 <View style={styles.footer}>
                     <TextInput 
                         style={styles.textInput}
-                        placeholder='>note'
+                        placeholder='> Agregar Nota'
                         onChangeText={(noteText)=> this.setState({noteText})}
                         value={this.state.noteText}
                         placeholderTextColor='white'
